@@ -1,0 +1,72 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #000; /* Set background color to black */
+    color: #fff; /* Set text color to white */
+}
+
+h1 {
+    font-family: 'Arial', sans-serif;
+    color: #fff; /* Set heading color to white */
+    text-align: center;
+    margin-top: 20px;
+}
+
+#threejs-container {
+    width: 100%;
+    height: 500px;
+    background-color: #f0f0f0;
+}
+
+.project {
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s;
+    text-align: center; /* Center project info */
+}
+
+.project:hover {
+    transform: scale(1.05);
+}
+
+.book {
+    width: 200px; /* Increase width of book */
+    height: 200px; /* Increase height of book */
+    background-color: #007bff; /* Set background color of book to blue */
+    border-radius: 5px; /* Add rounded corners */
+}
+
+.project-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    display: none;
+}
+
+.project:hover .project-overlay {
+    display: block;
+}
+
+.project-info {
+    width: 100%;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.7); /* Set background color for project info */
+    color: #000; /* Set text color for project info */
+    display: none;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.project:hover .project-info {
+    display: block;
+}
+
+.project-info h3,
+.project-info p {
+    margin: 0;
+}
