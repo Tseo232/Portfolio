@@ -13,11 +13,12 @@ h1 {
     margin-top: 20px;
 }
 
-#threejs-container {
-    position: relative;
-    width: 100%;
+#threejs-canvas {
+    display: block;
+    margin: 50px auto; /* Center horizontally and add some vertical margin */
+    width: 80%;
     height: 500px;
-    background-color: #f0f0f0;
+    z-index: 10;
 }
 
 .project {
@@ -70,4 +71,46 @@ h1 {
 .project-info h3,
 .project-info p {
     margin: 0;
+}
+
+/* New styles for overview card */
+.overview-card {
+    perspective: 1000px;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+}
+
+.overview-card:hover .card-body {
+    transform: rotateY(15deg);
+}
+
+.overview-content.active {
+    transform: translateX(-150%);
+}
+
+.overview-details {
+    display: none;
+    margin: 20px auto;
+    width: 80%;
+    text-align: center;
+}
+
+.overview-details.active {
+    display: block;
+}
+
+#overviewDetails {
+    transition: all 1s ease;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+#additionalCards {
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.overview-details.active #additionalCards {
+    display: flex;
+    opacity: 1;
 }

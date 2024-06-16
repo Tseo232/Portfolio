@@ -1,38 +1,35 @@
-// src/index.js
-import * as THREE from 'three';
-// Create the scene
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer();
-renderer.setSize(window.innerWidth, window.innerHeight);
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.148.0/build/three.module.js';
 
-// Append the renderer to the container
-const container = document.getElementById('threejs-container');
-container.appendChild(renderer.domElement);
+document.addEventListener('DOMContentLoaded', () => {
+    const canvas = document.getElementById('threejs-canvas');
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ canvas: canvas });
 
-// Create a cube
-const geometry = new THREE.BoxGeometry();
-const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-const cube = new THREE.Mesh(geometry, material);
-scene.add(cube);
+    renderer.setSize(canvas.clientWidth, canvas.clientHeight);
 
-camera.position.z = 5;
+    // Create a larger cube
+    const geometry = new THREE.BoxGeometry(2, 2, 2); // Increase dimensions to 2x2x2
+    const material = new THREE.MeshPhongMaterial({ color: 0x00ff00 }); // Use MeshPhongMaterial for better lighting
+    const cube = new THREE.Mesh(geometry, material);
+    scene.add(cube);
 
-// Animation loop
-function animate() {
-    requestAnimationFrame(animate);
-    cube.rotation.x += 0.01;
-    cube.rotation.y += 0.01;
-    renderer.render(scene, camera);
-}
+    // Add lighting
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5); // Soft white ambient light
+    scene.add(ambientLight);
 
-animate();
+    const pointLight = new THREE.PointLight(0xffffff, 1); // White point light
+    pointLight.position.set(5, 5, 5); // Position light source
+    scene.add(pointLight);
 
-// Handle window resize
-window.addEventListener('resize', () => {
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-    renderer.setSize(width, height);
-    camera.aspect = width / height;
-    camera.updateProjectionMatrix();
+    camera.position.z = 5;
+
+    // Function to rotate cube and update scene
+    function animate() {
+        requestAnimationFrame(animate);
+        cube.rotation.x += 0.01;
+        cube.rotation.y += 0.01;
+        renderer.render(scene, camera);
+    }
+    animate();
 });
